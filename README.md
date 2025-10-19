@@ -4,3 +4,9 @@ Project to help automate benchmarking of different cv models for different use c
 Primary purpose is to help with our capstone project where we have many different use cases, and we need to know which model would be best for each use case. The goal is to just upload a pic/video and run inference on it and return the stats for each. 
 
 Final goal is to make it highly customizable where we can allow users to describe their use case and their h/w requirements as well. 
+
+Could be very cool if I can run it through different methods of pre-processing and compare that as well :)
+
+## Tech stack + Architecure 
+
+For a quick release and testing right now I will be using Angular for the frontend, Kotlin + Spring for the backend and running the inference as an AWS lambda 
