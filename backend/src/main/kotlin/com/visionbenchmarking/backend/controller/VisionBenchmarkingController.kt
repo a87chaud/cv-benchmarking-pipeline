@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins=["http://localhost:4200"])
+@CrossOrigin(origins = ["http://cv-benchmark-frontend.s3-website.us-east-2.amazonaws.com"])
 class VisionBenchMarkingController {
     @PostMapping("/run-inference", consumes=["multipart/form-data"])
     fun runInference(@RequestPart("file") file: MultipartFile): ResponseEntity<Map<String, Any>> {
@@ -18,5 +18,10 @@ class VisionBenchMarkingController {
         )
 
         return ResponseEntity.ok(response)
+    }
+
+    @GetMapping("/")
+    fun test(): ResponseEntity<String> {
+        return ResponseEntity.ok("home")
     }
 }

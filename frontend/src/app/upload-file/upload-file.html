@@ -1,0 +1,21 @@
+<div class="upload-container">
+  <h2>Upload Image or Video</h2>
+  <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*" />
+
+  <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+
+  @if(response(); as res) {
+  <div>
+    <h3>Response:</h3>
+    <p>Processing Time: {{ res.processing_time_ms }} ms</p>
+    <p>Objects Detected: {{ res.objects_detected }}</p>
+    @if(res.annotated_img_url) {
+    <img
+         [src]="res.annotated_img_url"
+         alt="Annotated Image"
+         style="max-width: 500px;"/>
+    }
+  </div>
+}
+  
+</div>
