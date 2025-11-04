@@ -28,3 +28,4 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 ./DS_STORE
 frontend/.DS_STORE
+cv-models-service/cv-venv

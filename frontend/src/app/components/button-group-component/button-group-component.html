@@ -1,0 +1,9 @@
+<div role="group" aria-label="Button group"> @for(button of buttonConfigs; track button.value) {
+  <button  
+    type="button" 
+    class="btn btn-secondary **me-2**" 
+    (click)="selectButton(button.value)">
+    {{ button.text }}
+  </button>
+  }
+</div>
