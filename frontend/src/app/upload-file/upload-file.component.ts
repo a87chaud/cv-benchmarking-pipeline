@@ -49,7 +49,8 @@ export class UploadFile{
     formData.append('file', this.selectedFile)
     formData.append('model_use_case', this.selectedUseCase as string)
     console.log('formData: ', formData)
-    this.inferenceService.runInference(RUN_INFERENCE_URL, formData).subscribe({
+    const testingUrl = 'http://127.0.0.1:5000/pre-process'
+    this.inferenceService.runInference(testingUrl, formData).subscribe({
       next: (res) => {
         this.inferenceResponse.set(res)
       },

@@ -10,10 +10,11 @@
     <p>Processing Time: {{ res.processing_time_ms }} ms</p>
     <p>Objects Detected: {{ res.objects_detected }}</p>
     @if(res.annotated_img_url) {
-    <img
-         [src]="res.annotated_img_url"
-         alt="Annotated Image"
-         style="max-width: 500px;"/>
+      <img
+      [src]="'data:image/png;base64,' + res.annotated_img_url"
+      alt="Processed Image"
+      style="max-width: 500px; border-radius: 8px; margin-top: 1rem;"
+    />
     }
   </div>
 }
