@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from PIL import Image
 from models.pre_process import PreProcess
+from models.yolov5 import YoloV5
 import base64
 from io import BytesIO
 import time
@@ -56,5 +57,21 @@ def pre_process():
         'annotated_img_url': img_base64,
         'model_use_case': model_use_case
     })
+
+@app.route('/run-inference', methods=["POST"])
+def run_yolo_inference():
+    if "file" not in request.files:
+        return jsonify({'error': 'no file'}), 400
+    start_time = time.time()
+    img_file = request.files["file"]
+    yolo = YoloV5()
+    result = yolo.run_yolo_inference(img_file)
+    return jsonify({
+        'processing_time': result["speed"],
+        'objects_detected': result["boxes"],
+        'annotated_img_url': result["image"],
+        'model_use_case': "model_use_case"
+    })
+
 if __name__ == '__main__':
     app.run(debug=True)

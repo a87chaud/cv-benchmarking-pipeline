@@ -28,5 +28,14 @@ class PreProcess:
         img1 = self.resize(image)
         # img2 = self.grayscale(img1)
         return self.normalize(img1)
-
+    
+    def process_image(self, img_file):
+        file_bytes = np.frombuffer(img_file.read(), np.uint8)
+        image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+        pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        img_io = BytesIO()
+        pil_image.save(img_io, 'PNG')
+        img_io.seek(0)
+        img_base64 = base64.b64encode(img_io.read()).decode('utf-8')
+        return img_base64
     
