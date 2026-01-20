@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <input 
+      type="email" 
+      placeholder="Email" 
+      name="email" 
+      ngModel 
+      required
+    />
+
+    <input 
+      type="password" 
+      placeholder="Password" 
+      name="password" 
+      ngModel 
+      required
+    />
+
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>
+
+  <p style="margin-top:1rem;">Don't have an account? 
+    <span class="link" (click)="navigateTo('signup')">Signup</span>
+  </p>
+</div>

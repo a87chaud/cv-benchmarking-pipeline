@@ -92,3 +92,84 @@ img {
   height: auto;
   border: 3px solid #dbeafe;
 }
+
+.dropdown-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-top: 1rem;
+  display: block;
+}
+
+.styled-dropdown {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #60a5fa;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.styled-dropdown:hover {
+  border-color: #3b82f6;
+  background: #dbeafe;
+  transform: translateY(-2px);
+}
+
+.styled-dropdown:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.slider-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-top: 1rem;
+  display: block;
+}
+
+.slider-hint {
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #1e3a8a;
+  font-weight: 500;
+}
+
+.styled-slider {
+  width: 100%;
+  appearance: none;
+  height: 10px;
+  border-radius: 6px;
+  background: #dbeafe;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+/* Track hover */
+.styled-slider:hover {
+  background: #bfdbfe;
+  transform: translateY(-1px);
+}
+
+/* Thumb */
+.styled-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  transition: 0.2s;
+}
+
+.styled-slider::-webkit-slider-thumb:hover {
+  background: #1d4ed8;
+  scale: 1.1;
+}

@@ -1,3 +1,6 @@
+import base64
+from io import BytesIO
+from tkinter import Image
 import cv2
 import numpy as np
 
@@ -32,7 +35,7 @@ class PreProcess:
     def process_image(self, img_file):
         file_bytes = np.frombuffer(img_file.read(), np.uint8)
         image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-        pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) # type: ignore
         img_io = BytesIO()
         pil_image.save(img_io, 'PNG')
         img_io.seek(0)
