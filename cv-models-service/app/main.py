@@ -16,4 +16,4 @@ CORS(app, resources={
 app.register_blueprint(inference_bp)
 app.register_blueprint(s3_bp)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=False)

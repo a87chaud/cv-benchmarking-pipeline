@@ -12,7 +12,8 @@ class JobStatus(Enum):
 @dataclass
 class InferenceRequest:
     status: JobStatus
-    file: bytes
+    file_s3_url: str
+    annotation_s3_url: str
     target_latency: int
     target_accuracy: float
     target_hardware: str

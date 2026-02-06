@@ -40,13 +40,13 @@ def pre_process():
 
 @inference_bp.route('/benchmarking', methods=["POST"])
 def run_inference():
-    if "file" not in request.files:
-        return jsonify({'error': 'no file'}), 400
-    img_file = request.files["file"]
-    target_latency = request.form["target_latency"]
-    target_accuracy = request.form["target_accuracy"]
-    target_hardware = request.form["target_hardware"]
-    inference_req = InferenceRequest(status=JobStatus.IN_PROGRESS, file=img_file.read(), target_latency=int(target_latency), target_accuracy=float(target_accuracy), target_hardware=target_hardware)
+    inference_payload = request.get_json()
+    file_s3_key = inference_payload.get('file_s3_kley')
+    annotation_s3_key = inference_payload.get('annotation_s3_key')
+    target_latency = inference_payload.get("target_latency")
+    target_accuracy = inference_payload.get("target_accuracy")
+    target_hardware = inference_payload.get("target_hardware")
+    inference_req = InferenceRequest(status=JobStatus.IN_PROGRESS, file_s3_url=file_s3_key, annotation_s3_url=annotation_s3_key, target_latency=target_latency, target_accuracy=target_accuracy, target_hardware=target_hardware)
     benchmarking_service = BenchMarkingService()
     return jsonify(benchmarking_service.return_benchmarked_results(inference_req))
     # yolo = YoloV5()

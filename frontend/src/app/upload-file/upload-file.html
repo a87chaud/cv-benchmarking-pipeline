@@ -1,52 +1,40 @@
 <div class="upload-container">
-  <h2>Upload Image or Video</h2>
+  <h2>Upload Dataset for Benchmarking</h2>
 
-  <input
-    type="file"
-    (change)="onFileSelected($event)"
-    accept="image/*,video/*"
-  />
+  <label class="dropdown-label">Media File (Images ZIP or Video)</label>
+  <input type="file" (change)="onFileSelected($event)" accept=".zip,image/*,video/*" />
+
+  <label class="dropdown-label">Annotations (COCO JSON or ZIP)</label>
+  <input type="file" (change)="onAnnotationSelected($event)" accept=".json,.zip" />
 
   <!-- Model Use Case Dropdown -->
   <label class="dropdown-label">Model Use Case</label>
   <select [(ngModel)]="selectedUseCase" class="styled-dropdown">
-    @for(usecase of MODEL_USE_CASES; track $index) {
-    <option [value]="usecase.value">
-      {{ usecase.value }}
-    </option>
-  }
+    @for (usecase of MODEL_USE_CASES; track $index) {
+      <option [value]="usecase.value">
+        {{ usecase.value }}
+      </option>
+    }
   </select>
 
-   <!-- Latency Slider -->
-<label class="slider-label">
-  Latency (FPS Target): {{ latencyFps }} FPS
-</label>
-<input
-  type="range"
-  min="10"
-  max="120"
-  step="5"
-  [(ngModel)]="latencyFps"
-  class="styled-slider"
-/>
-<p class="slider-hint">Goal: “Must be ≥ {{ latencyFps }} FPS”</p>
+  <!-- Latency Slider -->
+  <label class="slider-label"> Latency (FPS Target): {{ latencyFps }} FPS </label>
+  <input type="range" min="10" max="120" step="5" [(ngModel)]="latencyFps" class="styled-slider" />
+  <p class="slider-hint">Goal: “Must be ≥ {{ latencyFps }} FPS”</p>
 
-<!-- Accuracy Slider -->
-<label class="slider-label">
-  Accuracy (mAP Threshold): {{ accuracyMap | number:'1.2-2' }}
-</label>
-<input
-  type="range"
-  min="0.5"
-  max="0.99"
-  step="0.01"
-  [(ngModel)]="accuracyMap"
-  class="styled-slider"
-/>
-<p class="slider-hint">
-  Goal: “mAP must be ≥ {{ accuracyMap | number:'1.2-2' }}”
-</p>
-
+  <!-- Accuracy Slider -->
+  <label class="slider-label">
+    Accuracy (mAP Threshold): {{ accuracyMap | number: '1.2-2' }}
+  </label>
+  <input
+    type="range"
+    min="0.5"
+    max="0.99"
+    step="0.01"
+    [(ngModel)]="accuracyMap"
+    class="styled-slider"
+  />
+  <p class="slider-hint">Goal: “mAP must be ≥ {{ accuracyMap | number: '1.2-2' }}”</p>
 
   <!-- Hardware Dropdown -->
   <label class="dropdown-label">Hardware</label>
@@ -57,16 +45,18 @@
     <option value="EDGE_TPU">EDGE_TPU</option>
   </select>
 
-  <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+  <button (click)="onUpload()" [disabled]="!selectedFile || !selectedAnnotation">
+    Run Benchmark
+  </button>
 
-  @if(inferenceResponse(); as res) {
+  @if (inferenceResponse(); as res) {
     <div>
       <h3>Response:</h3>
       <p>Processing Time: {{ res.processing_time_ms }} ms</p>
       <p>Objects Detected: {{ res.objects_detected }}</p>
 
-      @if(res.annotated_img_url) {
-        <img [src]="'data:image/jpeg;base64,' + res.annotated_img_url" alt="Annotated Image">
+      @if (res.annotated_img_url) {
+        <img [src]="'data:image/jpeg;base64,' + res.annotated_img_url" alt="Annotated Image" />
       }
     </div>
   }
